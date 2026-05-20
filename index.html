@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NutriCheck</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell container">
+      <header class="app-header">
+        <div class="header-brand">
+          <img
+            class="logo"
+            src="https://i.pinimg.com/736x/ec/7d/d2/ec7dd2062f54366da747528c0b5f0b2d.jpg"
+            alt="NutriCheck logo"
+          />
+          <div>
+            <h1>NutriCheck</h1>
+            <p>Ứng dụng kiểm tra dinh dưỡng và ghi nhật ký ăn uống.</p>
+          </div>
+        </div>
+        <nav class="top-nav">
+          <a href="index.html">Trang chính</a>
+          <a href="admin.html">Quản trị</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="panel panel-search">
+          <h2>Tìm và chọn món ăn</h2>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Nhập tên món ăn..."
+          />
+          <button id="searchBtn">Tìm</button>
+        </section>
+        <div id="message"></div>
+
+        <section class="panel panel-results">
+          <h2>Kết quả</h2>
+          <div id="results"></div>
+        </section>
+
+        <section class="panel panel-diary">
+          <h2>Nhật ký dinh dưỡng</h2>
+          <p>
+            Ghi lại các món bạn đã ăn trong ngày và theo dõi tổng calo, protein,
+            carb, fat.
+          </p>
+          <div id="totals"></div>
+          <div id="diaryList"></div>
+        </section>
+
+        <section class="panel panel-summary">
+          <h2>Chi tiết món ăn</h2>
+          <div id="summary">
+            <p>Chọn một món để xem chi tiết dinh dưỡng.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

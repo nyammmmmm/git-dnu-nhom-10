@@ -1,0 +1,138 @@
+:root {
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --text: #1f2937;
+  --accent: #2563eb;
+  --border: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header {
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+}
+
+.app-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
+}
+
+.app-header p {
+  margin: 0;
+  color: #334155;
+}
+
+main {
+  display: grid;
+  gap: 22px;
+}
+
+.panel {
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.panel-search {
+  display: grid;
+  gap: 12px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 1rem;
+}
+
+#searchBtn {
+  width: fit-content;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#searchBtn:hover {
+  background: #1d4ed8;
+}
+
+.food-card {
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.food-card:last-child {
+  margin-bottom: 0;
+}
+
+.food-card h3 {
+  margin: 0 0 8px;
+}
+
+.food-card p {
+  margin: 0;
+  color: #475569;
+}
+
+.nutri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.nutri-item {
+  padding: 14px;
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.nutri-item strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .panel-summary {
+    grid-column: span 2;
+  }
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NutriCheck - Quản trị</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="admin-shell container">
+      <header class="app-header">
+        <div>
+          <h1>NutriCheck Admin</h1>
+          <p>Quản lý danh sách món ăn và nhóm dinh dưỡng.</p>
+        </div>
+        <nav class="top-nav">
+          <a href="index.html">Trang chính</a>
+        </nav>
+      </header>
+
+      <main class="admin-panel">
+        <section class="panel">
+          <h2>Danh sách món ăn</h2>
+          <div id="adminMessage"></div>
+          <div id="productList"></div>
+        </section>
+
+        <section class="panel">
+          <h2 id="formTitle">Thêm món ăn mới</h2>
+          <form id="productForm" class="admin-form">
+            <input
+              id="foodName"
+              type="text"
+              placeholder="Tên món ăn"
+              required
+            />
+            <input
+              id="foodGroup"
+              type="text"
+              placeholder="Nhóm dinh dưỡng (Protein, Carb, Rau củ... )"
+            />
+            <input
+              id="foodImage"
+              type="text"
+              placeholder="Đường dẫn ảnh (img/... hoặc URL)"
+            />
+            <input
+              id="foodCalories"
+              type="number"
+              min="0"
+              placeholder="Calories"
+              required
+            />
+            <input
+              id="foodProtein"
+              type="number"
+              min="0"
+              placeholder="Protein (g)"
+              required
+            />
+            <input
+              id="foodCarbs"
+              type="number"
+              min="0"
+              placeholder="Carbs (g)"
+              required
+            />
+            <input
+              id="foodFat"
+              type="number"
+              min="0"
+              placeholder="Fat (g)"
+              required
+            />
+            <div class="admin-actions">
+              <button id="saveBtn" type="submit">Lưu</button>
+              <button id="cancelBtn" type="button" class="danger">Hủy</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
