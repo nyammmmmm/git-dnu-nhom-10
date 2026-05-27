@@ -15,8 +15,12 @@
 body {
     margin: 0;
     font-family: Inter, system-ui, sans-serif;
-    background: var(--bg);
     color: var(--text);
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-healthcare-science-medical-dna-banner-atmospheric-background-image_519714.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .container {
