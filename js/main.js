@@ -94,6 +94,7 @@ function renderTotals(entries) {
   const totals = entries.reduce(
     (acc, entry) => {
       const food = foodsData.find((item) => item.id === entry.foodId);
+      console.log(food);
       if (!food) return acc;
       acc.calories += food.calories * entry.quantity;
       acc.protein += food.protein * entry.quantity;

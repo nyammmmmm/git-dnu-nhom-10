@@ -9,7 +9,7 @@ window.NutriCheckAPI = (() => {
   ];
   let localDiaryEntries = [];
 
-  const useMock = !API_BASE;
+  const useMock = true;
 
   async function fetchFoods() {
     if (useMock) {

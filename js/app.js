@@ -43,7 +43,7 @@ function renderFoodList(list) {
   }
 
   resultsEl.innerHTML = "";
-  list.forEach((food, index) => {
+  list.forEach((food) => {
     const card = document.createElement("div");
     card.className = "food-card";
     card.innerHTML = `
