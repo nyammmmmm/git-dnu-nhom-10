@@ -4,17 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriCheck - Quản trị</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="admin-shell container">
+    <!-- Nền trang trí -->
+    <div class="bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+
+    <!-- Nút điều chỉnh cỡ chữ -->
+    <div class="font-size-bar">
+      <span class="font-size-label">Cỡ chữ</span>
+      <button class="fs-btn" id="fsSmall" title="Nhỏ">A</button>
+      <button class="fs-btn fs-active" id="fsMedium" title="Vừa">A</button>
+      <button class="fs-btn fs-large-btn" id="fsLarge" title="Lớn">A</button>
+    </div>
+
+    <!-- ===== MÀN HÌNH ĐĂNG NHẬP ===== -->
+    <div id="loginScreen" class="login-overlay">
+      <div class="login-card">
+        <div class="login-top-bar"></div>
+        <div class="login-logo-wrap">
+          <img
+            src="https://i.pinimg.com/736x/ec/7d/d2/ec7dd2062f54366da747528c0b5f0b2d.jpg"
+            alt="NutriCheck logo"
+          />
+        </div>
+        <h2>Đăng nhập Quản trị</h2>
+        <p class="login-sub">
+          Chỉ quản trị viên mới có thể truy cập trang này.
+        </p>
+        <div id="loginMessage"></div>
+        <div class="login-form">
+          <div class="input-group">
+            <span class="input-icon">👤</span>
+            <input id="loginUsername" type="text" placeholder="Tên đăng nhập" />
+          </div>
+          <div class="input-group">
+            <span class="input-icon">🔒</span>
+            <input id="loginPassword" type="password" placeholder="Mật khẩu" />
+          </div>
+          <button id="loginBtn">Đăng nhập</button>
+        </div>
+        <a href="index.html" class="login-back">← Quay về trang chính</a>
+      </div>
+    </div>
+
+    <!-- ===== TRANG ADMIN ===== -->
+    <div id="adminScreen" class="admin-shell container" style="display: none">
       <header class="app-header">
-        <div>
-          <h1>NutriCheck Admin</h1>
-          <p>Quản lý danh sách món ăn và nhóm dinh dưỡng.</p>
+        <div class="header-brand">
+          <img
+            class="logo"
+            src="https://i.pinimg.com/736x/ec/7d/d2/ec7dd2062f54366da747528c0b5f0b2d.jpg"
+            alt="NutriCheck logo"
+          />
+          <div>
+            <h1>NutriCheck Admin</h1>
+            <p>Quản lý danh sách món ăn và nhóm dinh dưỡng.</p>
+          </div>
         </div>
         <nav class="top-nav">
           <a href="index.html">Trang chính</a>
+          <button id="logoutBtn" class="btn-logout">Đăng xuất</button>
         </nav>
       </header>
 
@@ -37,7 +98,7 @@
             <input
               id="foodGroup"
               type="text"
-              placeholder="Nhóm dinh dưỡng (Protein, Carb, Rau củ... )"
+              placeholder="Nhóm dinh dưỡng (Protein, Carb, Rau củ...)"
             />
             <input
               id="foodImage"
@@ -48,7 +109,7 @@
               id="foodCalories"
               type="number"
               min="0"
-              placeholder="Calories"
+              placeholder="Calories (kcal)"
               required
             />
             <input
@@ -73,8 +134,10 @@
               required
             />
             <div class="admin-actions">
-              <button id="saveBtn" type="submit">Lưu</button>
-              <button id="cancelBtn" type="button" class="danger">Hủy</button>
+              <button id="saveBtn" type="submit">💾 Lưu</button>
+              <button id="cancelBtn" type="button" class="btn-cancel">
+                ✕ Hủy
+              </button>
             </div>
           </form>
         </section>
@@ -83,6 +146,26 @@
 
     <script src="js/api.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/admin.js"></script>
+    <script>
+      // Font size control
+      const root = document.documentElement;
+      const sizes = { fsSmall: "13px", fsMedium: "15px", fsLarge: "17px" };
+      const saved = localStorage.getItem("nc_fontsize") || "fsMedium";
+      root.style.fontSize = sizes[saved];
+      document.getElementById(saved)?.classList.add("fs-active");
+
+      ["fsSmall", "fsMedium", "fsLarge"].forEach((id) => {
+        document.getElementById(id)?.addEventListener("click", () => {
+          root.style.fontSize = sizes[id];
+          localStorage.setItem("nc_fontsize", id);
+          document
+            .querySelectorAll(".fs-btn")
+            .forEach((b) => b.classList.remove("fs-active"));
+          document.getElementById(id).classList.add("fs-active");
+        });
+      });
+    </script>
   </body>
 </html>

@@ -4,9 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriCheck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <!-- Nền trang trí -->
+    <div class="bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+
     <div class="app-shell container">
       <header class="app-header">
         <div class="header-brand">
@@ -21,44 +35,55 @@
           </div>
         </div>
         <nav class="top-nav">
-          <a href="index.html">Trang chính</a>
+          <a href="index.html" class="nav-active">Trang chính</a>
           <a href="admin.html">Quản trị</a>
         </nav>
       </header>
 
       <main>
+        <!-- Tìm kiếm -->
         <section class="panel panel-search">
           <h2>Tìm và chọn món ăn</h2>
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Nhập tên món ăn..."
-          />
-          <button id="searchBtn">Tìm</button>
+          <div class="search-row">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Nhập tên món ăn..."
+            />
+            <button id="searchBtn">🔍 Tìm kiếm</button>
+          </div>
         </section>
+
         <div id="message"></div>
 
+        <!-- Kết quả -->
         <section class="panel panel-results">
           <h2>Kết quả</h2>
           <div id="results"></div>
         </section>
 
-        <section class="panel panel-diary">
-          <h2>Nhật ký dinh dưỡng</h2>
-          <p>
-            Ghi lại các món bạn đã ăn trong ngày và theo dõi tổng calo, protein,
-            carb, fat.
-          </p>
-          <div id="totals"></div>
-          <div id="diaryList"></div>
-        </section>
+        <!-- Nhật ký + Chi tiết -->
+        <div class="bottom-row">
+          <section class="panel panel-diary">
+            <h2>Nhật ký dinh dưỡng</h2>
+            <p class="panel-desc">
+              Ghi lại các món bạn đã ăn trong ngày và theo dõi tổng calo,
+              protein, carb, fat.
+            </p>
+            <div id="totals"></div>
+            <div id="diaryList"></div>
+          </section>
 
-        <section class="panel panel-summary">
-          <h2>Chi tiết món ăn</h2>
-          <div id="summary">
-            <p>Chọn một món để xem chi tiết dinh dưỡng.</p>
-          </div>
-        </section>
+          <section class="panel panel-summary">
+            <h2>Chi tiết món ăn</h2>
+            <div id="summary">
+              <div class="empty-state">
+                <div class="empty-icon">🥗</div>
+                <p>Chọn một món để xem chi tiết dinh dưỡng.</p>
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
 

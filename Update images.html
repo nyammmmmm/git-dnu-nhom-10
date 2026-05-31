@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Update Images - NutriCheck</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #fff8f0;
+      }
+      h1 {
+        color: #ff6b6b;
+      }
+      button {
+        background: linear-gradient(135deg, #ff6b6b, #ff9f43);
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+      #log {
+        background: white;
+        border: 2px solid #ffe0cc;
+        border-radius: 12px;
+        padding: 16px;
+        min-height: 200px;
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+      .ok {
+        color: #2a7a3a;
+      }
+      .err {
+        color: #ff4757;
+      }
+      .info {
+        color: #4ecdc4;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🖼️ Cập nhật ảnh local cho 25 món ăn</h1>
+    <button onclick="updateImages()">🚀 Cập nhật ảnh</button>
+    <div id="log"><span class="info">Nhấn nút để bắt đầu...</span></div>
+
+    <script>
+      const API_BASE = "https://6a09e0f0e7e3f433d4838906.mockapi.io";
+      const logEl = document.getElementById("log");
+
+      const imageMap = {
+        "Cơm trắng": "img/com-trang.jpg",
+        "Ức gà nướng": "img/uc-ga-nuong.jpg",
+        "Salad rau trộn": "img/salad-rau-tron.jpg",
+        "Sinh tố chuối": "img/sinh-to-chuoi.jpg",
+        "Phở bò": "img/pho-bo.jpg",
+        "Bún bò Huế": "img/bun-bo-hue.jpg",
+        "Bánh mì thịt": "img/banh-mi-thit.jpg",
+        "Cơm tấm sườn": "img/com-tam-suon.jpg",
+        "Trứng luộc": "img/trung-luoc.jpg",
+        "Đậu hũ chiên": "img/dau-hu-chien.jpg",
+        "Cá hồi áp chảo": "img/ca-hoi-ap-chao.jpg",
+        "Tôm hấp": "img/tom-hap.jpg",
+        "Bông cải xanh luộc": "img/bong-cai-xanh.jpg",
+        "Cà rốt luộc": "img/ca-rot-luoc.jpg",
+        "Rau muống xào": "img/rau-muong-xao.jpg",
+        "Dưa hấu": "img/dua-hau.jpg",
+        "Xoài chín": "img/xoai-chin.jpg",
+        "Táo đỏ": "img/tao-do.jpg",
+        "Sữa chua không đường": "img/sua-chua.jpg",
+        "Sữa tươi không đường": "img/sua-tuoi.jpg",
+        "Yến mạch nấu": "img/yen-mach.jpg",
+        "Khoai lang luộc": "img/khoai-lang.jpg",
+        "Hạt hạnh nhân": "img/hat-hanh-nhan.jpg",
+        "Bơ (trái)": "img/bo-trai.jpg",
+        "Gạo lứt nấu": "img/gao-lut.jpg",
+      };
+
+      function log(msg, type = "ok") {
+        logEl.innerHTML += `<div class="${type}">${msg}</div>`;
+        logEl.scrollTop = logEl.scrollHeight;
+      }
+
+      async function updateImages() {
+        logEl.innerHTML = "";
+        log("🔄 Đang tải danh sách món ăn...", "info");
+
+        let foods;
+        try {
+          const res = await fetch(`${API_BASE}/foods`);
+          foods = await res.json();
+          log(`✅ Tìm thấy ${foods.length} món ăn`, "ok");
+        } catch (e) {
+          log("❌ Không tải được: " + e.message, "err");
+          return;
+        }
+
+        log(`🖼️ Bắt đầu cập nhật ảnh...`, "info");
+        let success = 0;
+
+        for (const food of foods) {
+          const newImage = imageMap[food.name];
+          if (!newImage) {
+            log(`⚠️ Không có ảnh cho: ${food.name}`, "err");
+            continue;
+          }
+          try {
+            const res = await fetch(`${API_BASE}/foods/${food.id}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ ...food, image: newImage }),
+            });
+            if (!res.ok) throw new Error(res.status);
+            success++;
+            log(`✅ [${success}/${foods.length}] ${food.name} → ${newImage}`);
+          } catch (e) {
+            log(`❌ Thất bại: ${food.name} — ${e.message}`, "err");
+          }
+          await new Promise((r) => setTimeout(r, 200));
+        }
+
+        log(
+          `🎉 Hoàn thành! Đã cập nhật ${success}/${foods.length} món.`,
+          "info",
+        );
+      }
+    </script>
+  </body>
+</html>
